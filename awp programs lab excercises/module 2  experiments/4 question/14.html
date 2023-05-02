@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Validation Example</title>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function() {
+        var form = document.getElementById("my-form");
+        form.addEventListener("submit", function(event) {
+          event.preventDefau
+          lt(); // prevent form submission
+
+          // retrieve form field values
+          var name = document.getElementById("name").value.trim();
+          var email = document.getElementById("email").value.trim();
+          var message = document.getElementById("message").value.trim();
+
+          // validate form field values
+          var isValid = true;
+          if (name === "") {
+            document.getElementById("name-error").textContent = "Please enter your name";
+            isValid = false;
+          } else {
+            document.getElementById("name-error").textContent = "";
+          }
+          if (email === "") {
+            document.getElementById("email-error").textContent = "Please enter your email";
+            isValid = false;
+          } else if (!/\S+@\S+\.\S+/.test(email)) {
+            document.getElementById("email-error").textContent = "Please enter a valid email address";
+            isValid = false;
+          } else {
+            document.getElementById("email-error").textContent = "";
+          }
+          if (message === "") {
+            document.getElementById("message-error").textContent = "Please enter a message";
+            isValid = false;
+          } else {
+            document.getElementById("message-error").textContent = "";
+          }
+
+          // submit form if all field values are valid
+          if (isValid) {
+            form.submit();
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form id="my-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+      <span id="name-error" class="error"></span><br><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+      <span id="email-error" class="error"></span><br><br>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message"></textarea>
+      <span id="message-error" class="error"></span><br><br>
+
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
